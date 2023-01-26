@@ -10,21 +10,22 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="Arithmetic Practice!"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_beginner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="140dp"
         android:text="Beginner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -37,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="140dp"
         android:text="Intermediate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="140dp"
         android:text="Advanced"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -61,8 +62,8 @@
         android:id="@+id/tv_beginnerHS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
         android:text="High Score: 0"
         app:layout_constraintStart_toEndOf="@+id/btn_beginner"
         app:layout_constraintTop_toTopOf="@+id/btn_beginner" />
@@ -71,8 +72,8 @@
         android:id="@+id/tv_intermediateHS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
         android:text="High Score: 0"
         app:layout_constraintStart_toEndOf="@+id/btn_intermediate"
         app:layout_constraintTop_toTopOf="@+id/btn_intermediate" />
@@ -81,10 +82,23 @@
         android:id="@+id/tv_advancedHS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
         android:text="High Score: 0"
         app:layout_constraintStart_toEndOf="@+id/btn_advanced"
         app:layout_constraintTop_toTopOf="@+id/btn_advanced" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="224dp"
+        android:text="Order of Operations: \nParantheses\nExponents\nMultiply\nDivision\nAdd\nSubtract"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
