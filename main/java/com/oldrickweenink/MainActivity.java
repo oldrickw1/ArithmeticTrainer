@@ -4,38 +4,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn_beginner;
-    Button btn_intermediate;
-    Button btn_advanced;
+    TextView tv_beginnerExpression;
+    EditText et_beginnerAnswer;
+    Button btn_beginnerSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        myApplication.setUpExpressionGenerator();
         // get references to buttons
-        btn_beginner = findViewById(R.id.btn_beginner);
-        btn_intermediate = findViewById(R.id.btn_intermediate);
-        btn_advanced = findViewById(R.id.btn_advanced);
+        tv_beginnerExpression = findViewById(R.id.tv_beginnerExpression);
+        et_beginnerAnswer = findViewById(R.id.et_beginnerAnswer);
+        btn_beginnerSubmit = findViewById(R.id.btn_beginnerSubmit);
 
-        // add onclickListeners for each button
-        btn_beginner.setOnClickListener(view -> {
-            Intent intent = new Intent(this, BeginnerPractice.class);
-            startActivity(intent);
+        Expression expression = myApplication.expressionGenerator.getBeginnerExpression();
+        tv_beginnerExpression.setText(expression.expression);
+
+        btn_beginnerSubmit.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(et_beginnerAnswer.getText().toString())) {
+                return;
+            }
+            int userAnswer = Integer.parseInt(et_beginnerAnswer.getText().toString());
+            if (userAnswer == expression.answer) {
+                Toast.makeText(this, "CORRECT!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(this, "INCORRECT!", Toast.LENGTH_SHORT).show();
+
+
         });
-
-        btn_intermediate.setOnClickListener(view -> {
-            Intent intent = new Intent(this, IntermediatePractice.class);
-            startActivity(intent);
-        });
-
-        btn_advanced.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AdvancedPractice.class);
-            startActivity(intent);
-        });
-
     }
 }
