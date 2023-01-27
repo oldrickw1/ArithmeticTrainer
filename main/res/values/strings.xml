@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Arithmethic Practice</string>
+    <string name="high_score">highScore</string>
 </resources>

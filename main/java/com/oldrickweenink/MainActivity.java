@@ -2,10 +2,13 @@ package com.oldrickweenink;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,12 +31,16 @@ public class MainActivity extends AppCompatActivity {
     private List<ImageView> heartList;
 
     private int answer;
+    private int highScore;
 
     private TextView tv_expression;
     private TextView tv_level;
     private EditText et_answer;
-    private CountDownTimer timer;
     private TextView tv_timer;
+    private TextView tv_highScore;
+
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -45,14 +52,17 @@ public class MainActivity extends AppCompatActivity {
         tv_level = findViewById(R.id.tv_level);
         et_answer = findViewById(R.id.et_answer);
         Button btn_submit = findViewById(R.id.btn_submit);
-        tv_timer = findViewById(R.id.tv_timer);
 
+        // TODO: Implement highscore mechanism
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        editor  = sharedPref.edit();
+        tv_highScore = findViewById(R.id.tv_highScore);
+        highScore = sharedPref.getInt(getString(R.string.high_score), 1);
+        tv_highScore.setText("HighScore: " +  highScore);
         expressionGenerator = new ExpressionGenerator();
         setNewExpression();
         resetHearts();
         currentLevel = 0;
-        resetTimer();
-
 
         btn_submit.setOnClickListener(view -> {
             if (checkIfAnswerIsEmpty()) return;
@@ -65,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
             }
             setNewExpression();
             clearAnswer();
-            timer.cancel();
-            resetTimer();
         });
     }
 
@@ -84,6 +92,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void levelUp() {
         tv_level.setText("Level: " + ++currentLevel);
+
+        highScore =  sharedPref.getInt(getString(R.string.high_score), 1);
+        Log.i(TAG, "High score: " + highScore);
+        if (currentLevel >= highScore) {
+            editor.putInt(getString(R.string.high_score), currentLevel);
+            editor.apply();
+            tv_highScore.setText("HighScore: " + highScore);
+        }
     }
 
     private void takeALife() {
@@ -119,23 +135,5 @@ public class MainActivity extends AppCompatActivity {
             heart.setVisibility(View.VISIBLE);
         }
     }
-
-    private void resetTimer() {
-        timer = new CountDownTimer(COUNTDOWN_TIME, 1000) {
-            @Override
-            public void onTick(long l) {
-                tv_timer.setText("Time: " + l / 1000);
-            }
-
-            @Override
-            public void onFinish() {
-                takeALife();
-                setNewExpression();
-                clearAnswer();
-                resetTimer();
-            }
-        }.start();
-    }
-
 
 }
