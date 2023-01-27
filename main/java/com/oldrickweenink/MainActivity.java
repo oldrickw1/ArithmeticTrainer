@@ -53,14 +53,20 @@ public class MainActivity extends AppCompatActivity {
             if (checkIfAnswerIsEmpty()) {
                 return;
             }
+
             if (checkIfAnswerIsCorrect()) {
                 levelUp();
             } else {
+                displayMistake();
                 takeALife();
             }
             setNewExpression();
             clearAnswer();
         });
+    }
+
+    private void displayMistake() {
+        Toast.makeText(this, "Wrong. Correct answer: " + expression.answer + ", your answer: " + et_beginnerAnswer.getText().toString(), Toast.LENGTH_SHORT).show();
     }
 
     private void levelUp() {
