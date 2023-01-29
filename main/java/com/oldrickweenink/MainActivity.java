@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void takeALife() {
         if (currentHeart <= 1) {
-            startActivity(new Intent(this, gameOver.class));
+            startActivity(new Intent(this, GameOver.class));
         }
         heartList.get(--currentHeart).setVisibility(View.INVISIBLE);
     }
